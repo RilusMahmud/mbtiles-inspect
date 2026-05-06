@@ -14,7 +14,24 @@ contribution rules.
 - M3 (TUI shell, Metadata/Zooms tabs) — done
 - M4 (TUI Tiles/Gaps/Preview tabs, vector layer summary) — done
 
-## Quick start
+## Install
+
+Prebuilt binaries for Linux and macOS (amd64 + arm64) are published on the
+[Releases page](https://github.com/RilusMahmud/mbtiles-inspect/releases).
+
+```sh
+# Linux (adjust version + arch as needed)
+curl -L -o mbtiles-inspect.tar.gz \
+  https://github.com/RilusMahmud/mbtiles-inspect/releases/latest/download/mbtiles-inspect_<version>_linux_amd64.tar.gz
+tar -xzf mbtiles-inspect.tar.gz
+./mbtiles-inspect --version
+```
+
+macOS binaries are not signed; after extracting, run
+`xattr -d com.apple.quarantine ./mbtiles-inspect` once to clear the
+quarantine attribute.
+
+To build from source instead:
 
 ```sh
 make fixtures        # generate test mbtiles
@@ -55,6 +72,21 @@ In Preview, `i` opens an entry prompt for a `z/x/y` (XYZ).
 - 1 — validation failure (gaps, corruption)
 - 2 — file unreadable / not an mbtiles
 - 3 — invocation error (bad args/flags)
+
+## Releasing (maintainers)
+
+Releases are produced by GoReleaser via GitHub Actions. To cut a release:
+
+```sh
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+The `release` workflow runs tests, then builds Linux + macOS binaries
+(amd64 + arm64) and publishes them to a new GitHub Release with a SHA-256
+checksum file. A manual `workflow_dispatch` run on the Actions tab produces
+a snapshot dry-run (binaries uploaded as a workflow artifact, no GitHub
+Release created) and is safe for verifying the pipeline.
 
 ## License
 

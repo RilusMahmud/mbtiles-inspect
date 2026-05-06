@@ -1,4 +1,5 @@
 /bin/
+/dist/
 /testdata/*.mbtiles
 /testdata/*.sqlite
 *.exe
