@@ -1,0 +1,5 @@
+/bin/
+/testdata/*.mbtiles
+/testdata/*.sqlite
+*.exe
+.DS_Store
