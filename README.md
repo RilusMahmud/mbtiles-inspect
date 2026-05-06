@@ -90,4 +90,4 @@ Release created) and is safe for verifying the pipeline.
 
 ## License
 
-MIT (add LICENSE file before publishing).
+MIT — see [LICENSE](./LICENSE).

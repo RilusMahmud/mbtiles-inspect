@@ -9,7 +9,19 @@ Backwards-incompatible changes to JSON shape require a major version bump.
 
 ## [Unreleased]
 
+## [0.1.0] — 2026-05-07
+
 ### Added
+- MIT `LICENSE` file.
+- GoReleaser-driven release pipeline (`.goreleaser.yaml` + GitHub Actions
+  workflow) producing Linux and macOS binaries (amd64 + arm64) with
+  SHA-256 checksums on every `v*` tag push. Manual `workflow_dispatch`
+  produces a snapshot dry-run uploaded as a workflow artifact.
+- `ci` GitHub Actions workflow running `gofmt -s`, `go vet`, and
+  `go test ./...` on push to `main` and on pull requests.
+- `--version` now reports the source commit and build date alongside
+  the version string (e.g. `v0.1.0 (abc1234, 2026-05-07T12:34:56Z)`),
+  populated via `-ldflags` at release time.
 - `diff` subcommand comparing two mbtiles files: metadata add/remove/modify,
   per-zoom tile-count and size deltas, and up to 10 sample tiles unique to
   each side. Tile coordinates in `only_in_a` / `only_in_b` are normalized to
