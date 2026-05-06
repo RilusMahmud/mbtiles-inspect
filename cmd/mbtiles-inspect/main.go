@@ -10,8 +10,12 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// version is set by the build via -ldflags; default for `go run`.
-var version = "dev"
+// Build metadata, set via -ldflags by GoReleaser; defaults apply for `go run`.
+var (
+	version = "dev"
+	commit  = ""
+	date    = ""
+)
 
 func main() {
 	root := newRootCmd()
@@ -21,11 +25,18 @@ func main() {
 	}
 }
 
+func versionString() string {
+	if commit == "" && date == "" {
+		return version
+	}
+	return fmt.Sprintf("%s (%s, %s)", version, commit, date)
+}
+
 func newRootCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:           "mbtiles-inspect [file.mbtiles]",
 		Short:         "Inspect .mbtiles files: metadata, zooms, gaps, tile previews.",
-		Version:       version,
+		Version:       versionString(),
 		Args:          cobra.MaximumNArgs(1),
 		SilenceUsage:  true,
 		SilenceErrors: true,
